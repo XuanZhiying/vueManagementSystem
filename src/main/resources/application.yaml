@@ -1,0 +1,53 @@
+server:
+  port: 8085
+#  address: 172.100.2.201
+spring:
+  datasource:
+    dynamic:
+      primary: mysqlvuedata
+      strict: true
+      datasource:
+        mysqlvuedata:
+          type: com.alibaba.druid.pool.DruidDataSource
+          url: jdbc:mysql://43.138.55.91:3306/vuedata?serverTimezone=GMT%2b8
+          username: user2
+          password: 741741
+          driver-class-name: com.mysql.cj.jdbc.Driver
+        mysqlmusicdata:
+          type: com.alibaba.druid.pool.DruidDataSource
+          url: jdbc:mysql://43.138.55.91:3306/musicdata?serverTimezone=GMT%2b8
+          username: user3
+          password: 741741
+          driver-class-name: com.mysql.cj.jdbc.Driver
+
+
+
+  servlet: #设定上传文件大小
+    multipart:
+      max-request-size: 5120MB
+      max-file-size: 5120MB
+
+
+logging:
+  level:
+    root: info
+    com.xuanzy.demo: debug
+
+mybatis-plus:
+  global-config:
+    db-config:
+      logic-delete-field: enable     #逻辑删除字段
+      logic-delete-value: 0          #已删除数据
+      logic-not-delete-value: 1      #有效数据
+  mapper-locations: classpath:mappers/*xml
+
+
+#指定文件上传路径
+file:
+  upload:
+    dir: D:/upload/                 #本机电脑所用路径
+  download:
+    fileUrl: http://localhost:8085/file/
+    pictureUrl: http://localhost:8085/picture/
+#    dir: /upload/                    #服务器所用路径
+

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xuanzy.demo.mapper.UserMapper">
+    <!-- 使用select,insert,update,delete,标签写SQL -->
+    <select id="selectAll" resultType="com.xuanzy.demo.entity.User">
+        select id,
+               username,
+               password,
+               nickname,
+               role,
+               email,
+               phone,
+               address,
+               createTime,
+               updateTime,
+               enable
+        from vuedata.vd_user
+        order by createTime desc
+    </select>
+    <select id="selectUserAndDownload" resultType="com.xuanzy.demo.entity.User">
+        select id,
+        username,
+        password,
+        nickname,
+        role,
+        email,
+        phone,
+        address,
+        createTime,
+        updateTime,
+        enable
+        from vuedata.vd_user u
+        <where>
+            <if test="user != null">
+                <if test="user.username != null and user.username!=''">
+                    and u.username like concat('%',#{user.username},'%')
+                </if>
+
+                <if test="user.email != null and user.email!=''">
+                    and u.email=#{user.email}
+                </if>
+
+                <if test="user.address != null and user.address!=''">
+                    and u.address=#{user.address}
+                </if>
+
+                <if test="user.createTime !=null">
+                    and DATE_FORMAT(u.createTime,'%Y-%m-%d')=DATE_FORMAT(#{user.createTime},'%Y-%m-%d')
+                </if>
+
+            </if>
+        </where>
+        order by u.createTime DESC
+    </select>
+    <select id="getUserByUserNameAndPassWord" resultType="com.xuanzy.demo.entity.User">
+        select id,
+               username,
+               nickname,
+               password,
+               email,
+               avatarUrl,
+               role
+        from vuedata.vd_user u
+        where u.username = #{user.username}
+          and password = #{user.password}
+          and enable = '1'
+    </select>
+
+
+    <select id="getCount" resultType="integer">
+        select count(*)
+        from vuedata.vd_user
+        where enable = '1'
+    </select>
+
+    <select id="selectUserAndPage" resultType="com.xuanzy.demo.entity.User">
+        select id,
+        username,
+        password,
+        role,
+        nickname,
+        email,
+        phone,
+        address,
+        createTime,
+        updateTime,
+        enable
+        from vuedata.vd_user u
+        <where>
+            <if test="user != null">
+                <if test="user.username != null and user.username!=''">
+                    and u.username like concat('%',#{user.username},'%')
+                </if>
+
+                <if test="user.email != null and user.email!=''">
+                    and u.email=#{user.email}
+                </if>
+
+                <if test="user.address != null and user.address!=''">
+                    and u.address=#{user.address}
+                </if>
+
+                <if test="user.createTime !=null">
+                    and DATE_FORMAT(u.createTime,'%Y-%m-%d')=DATE_FORMAT(#{user.createTime},'%Y-%m-%d')
+                </if>
+
+            </if>
+            and u.enable='1'
+        </where>
+        order by u.createTime DESC
+    </select>
+
+    <insert id="insertUserForeach">
+        INSERT INTO vuedata.vd_user(id, username, role,password, nickname, email, phone, address, createTime, updateTime,
+        enable) VALUES
+        <foreach collection="userlist" item="list" index="index" separator=",">
+            (
+            #{list.id},
+            #{list.username},#{list.password},
+            #{list.nickname},#{list.email},
+            #{list.phone},#{list.address},
+            #{list.createTime},#{list.updateTime},
+            #{list.enable}
+            )
+        </foreach>
+    </insert>
+    <select id="countUser" resultType="integer">
+        select count(*) as counts from vuedata.vd_user where enable='1'
+    </select>
+
+    <select id="dropTable">
+        drop table test1
+    </select>
+</mapper>

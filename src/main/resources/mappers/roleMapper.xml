@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xuanzy.demo.mapper.RoleMapper">
+    <!-- 使用select,insert,update,delete,标签写SQL -->
+    <select id="selectRoleAndPage" resultType="com.xuanzy.demo.entity.Role">
+        select id, name, description,flag
+        from vuedata.vd_role
+        <where>
+            <if test="role !=null">
+                <if test="role.name != null and role.name!=''">
+                    and name=#{role.name}
+                </if>
+                <if test="role.description != null and role.description !=''">
+                    and description=#{role.description}
+                </if>
+            </if>
+            and enable='1'
+        </where>
+    </select>
+    <select id="selectByFlag" resultType="integer">
+        select id
+        from vd_role
+        where flag = #{flag};
+    </select>
+</mapper>

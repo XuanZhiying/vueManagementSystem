@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xuanzy.demo.mapper.MenuMapper">
+    <!-- 使用select,insert,update,delete,标签写SQL -->
+    <sql id="menuCondition">
+        <if test="menu !=null">
+            <if test="menu.name !=null and menu.name!=''">
+                and name like concat('%',#{menu.name},'%')
+            </if>
+            <if test="menu.path !=null and menu.path!=''">
+                and path=#{menu.path}
+            </if>
+            <if test="menu.icon !=null and menu.icon!=''">
+                and icon=#{menu.icon}
+            </if>
+            <if test="menu.description !=null and menu.description!=''">
+                and description=#{menu.description}
+            </if>
+        </if>
+    </sql>
+    <select id="selectMenuAndPage" resultType="com.xuanzy.demo.entity.Menu">
+        select id, name, path, icon, description, enable
+        from vuedata.vd_menu
+        <where>
+            <include refid="menuCondition"></include>
+        </where>
+    </select>
+    <select id="selectFatherMenu" resultType="integer">
+        select id from vd_menu where pid is null
+    </select>
+</mapper>

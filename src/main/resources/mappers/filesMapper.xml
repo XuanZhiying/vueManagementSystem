@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xuanzy.demo.mapper.FileMapper">
+    <!-- 使用select,insert,update,delete,标签写SQL -->
+    <select id="getFilesByUuid" resultType="com.xuanzy.demo.entity.Files">
+        select id,
+               uuid,
+               OldFileName,
+               newFileName,
+               type,
+               size,
+               url,
+               md5,
+               enable,
+               isDelete
+        from vuedata.vd_file
+        where uuid = #{uuid}
+          and enable = '1'
+    </select>
+    <select id="getFilesByMD5" resultType="com.xuanzy.demo.entity.Files">
+        select id,
+               uuid,
+               OldFileName,
+               newFileName,
+               type,
+               size,
+               url,
+               md5,
+               enable,
+               isDelete
+        from vuedata.vd_file
+        where md5 = #{md5}
+          and enable = '1'
+    </select>
+
+    <select id="selectFilesAndPage" resultType="com.xuanzy.demo.entity.Files">
+        select id,
+        uuid,
+        OldFileName,
+        newFileName,
+        type,
+        size,
+        url,
+        md5,
+        enable,
+        uploadTime,
+        isDelete
+        from vuedata.vd_file
+        <where>
+            <if test="files != null">
+                <if test="files.OldFileName !=null and files.OldFileName!=''">
+                    and OldFileName like concat('%',#{files.OldFileName},'%')
+                </if>
+                <if test="files.size != null and files.size!=''">
+                    and size=#{files.size}
+                </if>
+                <if test="files.uploadTime !=null">
+                    and DATE_FORMAT(uploadTime,'%Y-%m-%d')=DATE_FORMAT(#{files.uploadTime},'%Y-%m-%d')
+                </if>
+            </if>
+            and enable='1'
+        </where>
+        order by uploadTime DESC
+    </select>
+
+    <select id="selectAllFiles" resultType="com.xuanzy.demo.entity.Files">
+        select id,
+               uuid,
+               OldFileName,
+               newFileName,
+               type,
+               size,
+               url,
+               uploadTime,
+               md5,
+               enable,
+               isDelete
+        from vuedata.vd_file
+        where enable = '1'
+    </select>
+    <select id="countFiles" resultType="integer">
+        select count(md5) as counts from vuedata.vd_file where enable='1'
+    </select>
+</mapper>

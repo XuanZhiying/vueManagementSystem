@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xuanzy.demo.mapper.musicMapper.MusicFileMapper">
+    <!-- 使用select,insert,update,delete,标签写SQL -->
+    <select id="selectOneByMd5" resultType="com.xuanzy.demo.entity.Music.MusicFile">
+        select id, songName, songUuid, songMd5, uploadTime, uploadName, enable,fileType
+        from musicfile
+        where songMd5 = #{md5}
+          and enable = '1'
+    </select>
+</mapper>

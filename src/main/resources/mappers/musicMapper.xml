@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xuanzy.demo.mapper.musicMapper.MusicMapper">
+    <!-- 使用select,insert,update,delete,标签写SQL -->
+    <sql id="musicpd">
+        <if test="music!=null">
+            <if test="music.musicType!=null and music.musicType!=''">
+                and musicType=#{music.musicType}
+            </if>
+        </if>
+    </sql>
+    <select id="selectAll" resultType="com.xuanzy.demo.entity.Music.Music">
+        select id,
+               musicName,
+               musicType,
+               author,
+               musicImageFile,
+               musicFile,
+               lyric,
+               enable
+        from music
+        where enable = '1'
+    </select>
+    <select id="selectMusicAndPage" resultType="com.xuanzy.demo.entity.Music.Music">
+        select id,
+        musicName,
+        musicType,
+        author,
+        musicImageFile,
+        musicFile,
+        lyric,
+        enable
+        from music
+        <where>
+            <include refid="musicpd"></include>
+            and enable='1'
+        </where>
+    </select>
+</mapper>
