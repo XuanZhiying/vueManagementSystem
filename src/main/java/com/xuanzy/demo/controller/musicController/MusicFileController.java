@@ -1,13 +1,12 @@
-package com.xuanzy.demo.controller;
+package com.xuanzy.demo.controller.musicController;
 
 import com.xuanzy.demo.common.Result;
 import com.xuanzy.demo.service.musicService.MusicFileService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
@@ -24,5 +23,9 @@ public class MusicFileController {
     @PostMapping("/uploadSongFile")
     public Result uploadSongFile(MultipartFile file) throws IOException {
         return musicFileService.uploadSongFile(file);
+    }
+    @GetMapping("/{uuid}")
+    public Result onlineOpenFile(@PathVariable String uuid,HttpServletResponse httpServletResponse) throws IOException {
+        return musicFileService.onlineOpenMusic(uuid,httpServletResponse);
     }
 }

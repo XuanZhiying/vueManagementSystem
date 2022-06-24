@@ -10,4 +10,5 @@ import org.apache.ibatis.annotations.Param;
  **/
 public interface MusicFileMapper extends BaseMapper<MusicFile> {
     MusicFile selectOneByMd5(String md5);
+    MusicFile selectFileByUuid(@Param("uuid") String uuid);
 }

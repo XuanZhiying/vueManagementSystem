@@ -19,6 +19,9 @@ spring:
           username: user3
           password: 741741
           driver-class-name: com.mysql.cj.jdbc.Driver
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
 
 
 
@@ -49,5 +52,6 @@ file:
   download:
     fileUrl: http://localhost:8085/file/
     pictureUrl: http://localhost:8085/picture/
+    musicUrl: http://localhost:8085/musicFile/
 #    dir: /upload/                    #服务器所用路径
 

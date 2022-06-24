@@ -25,17 +25,20 @@ public class MusicFile {
     @TableId(value = "id",type = IdType.AUTO)
     private Integer id;
 
-    @TableField(value = "songName")
-    private String songName;
+    @TableField(value = "fileName")
+    private String fileName;
 
-    @TableField(value = "songUuid")
-    private String songUuid;
+    @TableField(value = "fileUuid")
+    private String fileUuid;
 
-    @TableField(value = "songMd5")
-    private String songMd5;
+    @TableField(value = "fileMd5")
+    private String fileMd5;
 
     @TableField(value = "uploadTime")
     private Date uploadTime;
+
+    @TableField(exist = false)
+    private String Url;
 
     @TableField(value = "uploadName")
     private String uploadName;

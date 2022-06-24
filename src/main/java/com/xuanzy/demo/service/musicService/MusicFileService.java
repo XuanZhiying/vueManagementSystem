@@ -5,6 +5,7 @@ import com.xuanzy.demo.common.Result;
 import com.xuanzy.demo.entity.Music.MusicFile;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
@@ -13,4 +14,5 @@ import java.io.IOException;
  **/
 public interface MusicFileService extends IService<MusicFile> {
     Result uploadSongFile(MultipartFile file) throws IOException;
+    Result onlineOpenMusic(String uuid, HttpServletResponse httpServletResponse) throws IOException;
 }

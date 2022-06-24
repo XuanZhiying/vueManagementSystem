@@ -12,26 +12,22 @@
         </if>
     </sql>
     <select id="selectAll" resultType="com.xuanzy.demo.entity.Music.Music">
-        select id,
-               musicName,
-               musicType,
-               author,
-               musicImageFile,
-               musicFile,
-               lyric,
-               enable
+        select ID,
+               MUSICNAME,
+               MUSICTYPE,
+               AUTHOR,
+               MUSICIMAGEFILEUUID,
+               MUSICIMAGEFILENAME,
+               MUSICFILENAME,
+               MUSICFILEUUID,
+               LYRIC,
+               ENABLE
         from music
         where enable = '1'
     </select>
     <select id="selectMusicAndPage" resultType="com.xuanzy.demo.entity.Music.Music">
-        select id,
-        musicName,
-        musicType,
-        author,
-        musicImageFile,
-        musicFile,
-        lyric,
-        enable
+        select id, musicName, musicType, author, musicImageFileUuid, musicImageFileName, musicFileName, musicFileUuid,
+        lyric, enable
         from music
         <where>
             <include refid="musicpd"></include>

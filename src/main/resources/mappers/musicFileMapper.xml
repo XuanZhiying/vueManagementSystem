@@ -5,9 +5,15 @@
 <mapper namespace="com.xuanzy.demo.mapper.musicMapper.MusicFileMapper">
     <!-- 使用select,insert,update,delete,标签写SQL -->
     <select id="selectOneByMd5" resultType="com.xuanzy.demo.entity.Music.MusicFile">
-        select id, songName, songUuid, songMd5, uploadTime, uploadName, enable,fileType
+        select id, fileName, fileUuid, fileMd5, uploadTime, uploadName, fileType, enable
         from musicfile
-        where songMd5 = #{md5}
+        where fileMd5 = #{md5}
+          and enable = '1'
+    </select>
+    <select id="selectFileByUuid" resultType="com.xuanzy.demo.entity.Music.MusicFile">
+        select id, fileName, fileUuid, fileMd5, uploadTime, uploadName, fileType, enable
+        from musicfile
+        where fileUuid = #{uuid}
           and enable = '1'
     </select>
 </mapper>

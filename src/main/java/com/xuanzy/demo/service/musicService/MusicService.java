@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
  * Create: 2022-06-06 14:52
  **/
 public interface MusicService extends IService<Music> {
-    Result saveMusic(MultipartFile file,Music music);
+    Result saveMusic(Music music);
 
     Result pageMusic(Integer current,Integer size,Music music);
 }

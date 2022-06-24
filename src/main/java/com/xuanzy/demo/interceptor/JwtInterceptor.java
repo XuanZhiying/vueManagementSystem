@@ -63,7 +63,7 @@ public class JwtInterceptor implements HandlerInterceptor {
                 try {
                     userId = JWT.decode(token).getAudience().get(0);
                 } catch (JWTDecodeException j) {
-                    throw new ServiceException(Constants.CODE_401,"token验证失败，请重新登录");
+                    throw new ServiceException(Constants.CODE_401,"token验证失败，无法获取用户ID，请重新登录");
                 }
                 User user = userService.getById(userId);
                 if (user == null) {
@@ -74,7 +74,7 @@ public class JwtInterceptor implements HandlerInterceptor {
                 try {
                     jwtVerifier.verify(token); //验证 token
                 } catch (JWTVerificationException e) {
-                    throw new ServiceException(Constants.CODE_401,"token验证失败，请重新登录");
+                        throw new ServiceException(Constants.CODE_401,"token验证失败，请重新登录");
                 }
                 return true;
             }
