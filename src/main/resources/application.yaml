@@ -9,14 +9,14 @@ spring:
       datasource:
         mysqlvuedata:
           type: com.alibaba.druid.pool.DruidDataSource
-          url: jdbc:mysql://43.138.55.91:3306/vuedata?serverTimezone=GMT%2b8
-          username: user2
+          url: jdbc:mysql://436/vuedata?serverTimezone=GMT%2b8
+          username: 2
           password: 741741
           driver-class-name: com.mysql.cj.jdbc.Driver
         mysqlmusicdata:
           type: com.alibaba.druid.pool.DruidDataSource
-          url: jdbc:mysql://43.138.55.91:3306/musicdata?serverTimezone=GMT%2b8
-          username: user3
+          url: jdbc:mysql://4306/musicdata?serverTimezone=GMT%2b8
+          username: ur
           password: 741741
           driver-class-name: com.mysql.cj.jdbc.Driver
   mvc:
